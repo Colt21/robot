@@ -1,0 +1,41 @@
+#include <Servo.h>
+
+void setup(){
+pinMode(4,OUTPUT);
+pinMode(5,OUTPUT);
+Serial.begin(9600);
+}
+
+void speed(int Pin, double bruchTeil){
+
+int offSet=40;
+int speedVar=215;
+speedVar=bruchTeil*speedVar + offSet;
+analogWrite(Pin, (int)speedVar);
+Serial.print(speedVar),
+Serial.print("\n");
+
+
+void loop(){
+double geschw = 0.0;
+
+for(int i; i<10; i++){
+geschw = i/10.0;
+
+Serial.print(geschw);
+Serial.print("\n");
+digitalWrite(4,1);
+speed(5,geschw);
+digitalWrite(2,1);
+speed(3,0.0);
+
+delay(2000);
+
+digitalWrite(4,0);
+analogWrite(5,0);
+digitalWrite(2,0);
+analogWrite(3,0);
+
+delay(2000);
+  }
+}
